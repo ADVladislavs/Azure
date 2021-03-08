@@ -1,6 +1,9 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
+    "parameters": {
+    },
+    "variables": {},
     "resources": [
         {
             "type": "Microsoft.Compute/virtualMachines",
@@ -19,18 +22,16 @@
                         "version": "latest"
                     },
                     "osDisk": {
-                        "osType": "Windows",
-                        "name": "[concat(parameters('virtualMachines_ARMvm_name'), '_disk1_c5248130873243e2afb47c2a7066ba57')]",
                         "createOption": "FromImage",
-                        "caching": "ReadWrite",
-                        "managedDisk": {
-                            "id": "[parameters('disks_ARMvm_disk1_c5248130873243e2afb47c2a7066ba57_externalid')]"
+						"managedDisk": {
+							"storageAccountType": "StandardSSD_LRS"
+									}
+
                         }
                     },
                     "dataDisks": []
                 },
                 "osProfile": {
-                    "computerName": "[parameters('virtualMachines_ARMvm_name')]",
                     "adminUsername": "userRoot",
                     "windowsConfiguration": {
                         "provisionVMAgent": true,
@@ -43,7 +44,6 @@
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[parameters('networkInterfaces_ARMvm_externalid')]"
                         }
                     ]
                 }
