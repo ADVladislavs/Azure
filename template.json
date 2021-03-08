@@ -2,21 +2,13 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "virtualMachines_ARMvm_name": {
-            "defaultValue": "ARMvm",
-            "type": "String"
-        },
-         "networkInterfaces_ARMvm_externalid": {
-            "defaultValue": "/subscriptions/811c64c8-a770-471a-b3cf-e46fd311753d/resourceGroups/Test/providers/Microsoft.Network/networkInterfaces/ARMvm",
-            "type": "String"
-        }
     },
     "variables": {},
     "resources": [
         {
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2019-07-01",
-            "name": "[parameters('virtualMachines_ARMvm_name')]",
+            "name": "ARMvm",
             "location": "eastus",
             "properties": {
                 "hardwareProfile": {
