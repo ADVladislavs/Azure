@@ -24,16 +24,6 @@
                     "osDisk": {
                         "createOption": "FromImage",
                         }
-                "osProfile": {
-                    "adminUsername": "userRoot",
-                    "windowsConfiguration": {
-                        "provisionVMAgent": true,
-                        "enableAutomaticUpdates": true
-                    },
-                    "secrets": [],
-                    "allowExtensionOperations": true,
-                    "requireGuestProvisionSignal": true
-                },
                 "networkProfile": {
                     "networkInterfaces": [
 
