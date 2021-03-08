@@ -23,13 +23,8 @@
                     },
                     "osDisk": {
                         "createOption": "FromImage",
-						"managedDisk": {
-
-
-                        }
+						
                     },
-                    "dataDisks": []
-                },
                 "osProfile": {
                     "computerName": "ARMServer",
                     "adminUsername": "userRoot",
@@ -47,5 +42,6 @@
                 				]
             }
         }
+		}
+    ]
 }
-	    }
