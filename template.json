@@ -23,7 +23,30 @@
                     },
                     "osDisk": {
                         "createOption": "FromImage",
+						"managedDisk": {
+
+
                         }
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "computerName": "ARMServer",
+                    "adminUsername": "userRoot",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true
+                    },
+                    "secrets": [],
+                    "allowExtensionOperations": true,
+                    "requireGuestProvisionSignal": true
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                        }
+                    ]
+                }
             }
         }
     ]
