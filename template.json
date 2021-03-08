@@ -21,11 +21,12 @@
                         "sku": "2019-Datacenter",
                         "version": "latest"
                     },
-					}
+					
                     "osDisk": {
                         "createOption": "FromImage",
 						
                     },
+					}
                 "osProfile": {
                     "computerName": "ARMServer",
                     "adminUsername": "userRoot",
