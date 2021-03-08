@@ -34,7 +34,6 @@
                         "provisionVMAgent": true,
                         "enableAutomaticUpdates": true
                     },
-                    "secrets": [],
                     "allowExtensionOperations": true,
                     "requireGuestProvisionSignal": true
 					}
