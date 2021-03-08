@@ -47,7 +47,6 @@
                 "osProfile": {
                     "computerName": "[parameters('virtualMachines_ARMvm_name')]",
                     "adminUsername": "userRoot",
-					"adminPassword": "Parole_AZ97Parole8"
                     "windowsConfiguration": {
                         "provisionVMAgent": true,
                         "enableAutomaticUpdates": true
