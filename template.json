@@ -21,6 +21,7 @@
                         "sku": "2019-Datacenter",
                         "version": "latest"
                     },
+					}
                     "osDisk": {
                         "createOption": "FromImage",
 						
@@ -36,11 +37,8 @@
                     "allowExtensionOperations": true,
                     "requireGuestProvisionSignal": true
 					}
-                "networkProfile": {
-                    "networkInterfaces": []
-            }
         }
 		}
-		}
+		
     ]
 }
