@@ -6,11 +6,7 @@
             "defaultValue": "ARMvm",
             "type": "String"
         },
-        "disks_ARMvm_disk1_c5248130873243e2afb47c2a7066ba57_externalid": {
-            "defaultValue": "/subscriptions/811c64c8-a770-471a-b3cf-e46fd311753d/resourceGroups/TEST/providers/Microsoft.Compute/disks/ARMvm_disk1_c5248130873243e2afb47c2a7066ba57",
-            "type": "String"
-        },
-        "networkInterfaces_ARMvm_externalid": {
+         "networkInterfaces_ARMvm_externalid": {
             "defaultValue": "/subscriptions/811c64c8-a770-471a-b3cf-e46fd311753d/resourceGroups/Test/providers/Microsoft.Network/networkInterfaces/ARMvm",
             "type": "String"
         }
@@ -37,7 +33,12 @@
                         "osType": "Windows",
                         "name": "[concat(parameters('virtualMachines_ARMvm_name'), '_disk1_c5248130873243e2afb47c2a7066ba57')]",
                         "createOption": "FromImage",
-                                             "dataDisks": []
+                        "caching": "ReadWrite",
+                        "managedDisk": {
+                            "id": "[parameters('disks_ARMvm_disk1_c5248130873243e2afb47c2a7066ba57_externalid')]"
+                        }
+                    },
+                    "dataDisks": []
                 },
                 "osProfile": {
                     "computerName": "[parameters('virtualMachines_ARMvm_name')]",
