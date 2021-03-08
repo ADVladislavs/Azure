@@ -41,12 +41,7 @@
                     "allowExtensionOperations": true,
                     "requireGuestProvisionSignal": true
                 },
-                "networkProfile": 
-                    {
-                    "networkInterfaces": [
-                       {
-                            "id": "ARMvm-net"
-                        }
+
                 }
 				]
             }
