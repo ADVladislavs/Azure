@@ -18,9 +18,9 @@
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2019-11-01",
             "location": "[resourceGroup().location]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', 'otraVM')]"
-            ],
+            //"dependsOn": [
+               // "[resourceId('Microsoft.Network/virtualNetworks', 'otraVM')]"
+           // ],
             "tags": {
                 "displayName": "[concat(parameters('vmname'), '-vNetAd')]"
             },
@@ -31,7 +31,7 @@
                         "properties": {
                             "privateIPAllocationMethod": "Dynamic",
                             "subnet": {
-                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'windowsVM1-VirtualNetwork', 'windowsVM1-VirtualNetwork-Subnet')]"
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'Test-vnet', 'default')]"
                             }
                         }
                     }
