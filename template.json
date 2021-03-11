@@ -2,17 +2,62 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "vmname": {
+            "defaultValue": "armvm",
+            "type": "string"
+        }
     },
-    "variables": {},
+    "functions": [],
+    "variables": {
+        "vNIC": "[concat(parameters('vmname'),'-vNIC')]",
+        "osDisk": "[concat(parameters('vmname'), '-osDisks')]"
+    },
     "resources": [
+                                       {
+            "name": "[variables('vNIC')]",
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2019-11-01",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', 'otraVM')]"
+            ],
+            "tags": {
+                "displayName": "[concat(parameters('vmname'), '-vNetAd')]"
+            },
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipConfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'windowsVM1-VirtualNetwork', 'windowsVM1-VirtualNetwork-Subnet')]"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
         {
+            "name": "[parameters('vmname')]",
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2019-07-01",
-            "name": "ARMvm",
-            "location": "eastus",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', toLower(variables('osDisk')))]",
+                "[resourceId('Microsoft.Network/networkInterfaces', 'ARMvm-NetworkInterface')]"
+            ],
+            "tags": {
+                "displayName": "[parameters('vmname')]"
+            },
             "properties": {
                 "hardwareProfile": {
-                    "vmSize": "Standard_DS1_v2"
+                    "vmSize": "Standard_A2_v2"
+                },
+                "osProfile": {
+                    "computerName": "[parameters('vmname')]",
+                    "adminUsername": "userROOT",
+                    "adminPassword": "Parole123@"
                 },
                 "storageProfile": {
                     "imageReference": {
@@ -20,25 +65,21 @@
                         "offer": "WindowsServer",
                         "sku": "2019-Datacenter",
                         "version": "latest"
+                    },
+                    "osDisk": {
+                        "name": "[variables('osDisk')]",
+                        "caching": "ReadWrite",
+                        "createOption": "FromImage"
                     }
                 },
-                    "osDisk": {
-                        "createOption": "FromImage"
-						
-                    
-					},
-                "osProfile": {
-                    "computerName": "ARMServer",
-                    "adminUsername": "userRoot",
-                    "windowsConfiguration": {
-                        "provisionVMAgent": true,
-                        "enableAutomaticUpdates": true
-                    },
-                    "allowExtensionOperations": true,
-                    "requireGuestProvisionSignal": true
-					}
-        }   }
-		
-		
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('vNIC'))]"
+                        }
+                    ]
+                }
+            }
+        }
     ]
 }
