@@ -3,9 +3,8 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "vmname": {
-            "defaultValue": "armvm",
-            "type": "string"
-        }
+           "type": "string",
+            "defaultValue": "armVM"}
     },
     "functions": [],
     "variables": {
@@ -13,6 +12,23 @@
         "osDisk": "[concat(parameters('vmname'), '-osDisks')]"
     },
     "resources": [
+        {
+            "type": "Microsoft.Compute/availabilitySets",
+            "name": "[concat(parameters('vmname'), '-', copyIndex())]",
+            "apiVersion": "2020-06-01",
+            "location": "[resourceGroup().location]",
+            "copy":{
+                "name": "vairakas",
+                "count": 3
+            },
+            "properties": {
+                "platformFaultDomainCount": 3,
+                "platformUpdateDomainCount": 3
+            },
+            "sku": {
+                "name": "Aligned"
+            }
+        },
                                        {
             "name": "[variables('vNIC')]",
             "type": "Microsoft.Network/networkInterfaces",
@@ -36,8 +52,7 @@
                         }
                     }
                 ]
-            }
-        },
+            }                   },
         {
             "name": "[parameters('vmname')]",
             "type": "Microsoft.Compute/virtualMachines",
@@ -80,6 +95,6 @@
                     ]
                 }
             }
-        }
+        }           
     ]
 }
