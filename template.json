@@ -82,7 +82,7 @@
                         "version": "latest"
                     },
                     "osDisk": {
-                        "name": "[variables('osDisk')]",
+                        "name":  "osDisc",
                         "caching": "ReadWrite",
                         "createOption": "FromImage"
                     }
