@@ -60,7 +60,7 @@
                         "version": "latest"
                     },
                     "osDisk": {
-                        "name":  "[concat (parameters('vmname'), copyIndex(), ' -osDisk')]",
+                        "name":  "[concat (parameters('vmname'), copyIndex(), '-osDisk')]",
                         "caching": "ReadWrite",
                         "createOption": "FromImage"
                     }
