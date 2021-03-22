@@ -31,7 +31,7 @@
             },
             "copy":{
                 "name": "vairakas",
-                "count": 2                
+                "count": 4                
             }
                           },
         {
@@ -45,7 +45,7 @@
             ],
             "properties": {
                 "hardwareProfile": {
-                    "vmSize": "Standard_A2_v2"
+                    "vmSize": "Standard_A1_v2"
                 },
                 "osProfile": {
                     "computerName": "[parameters('vmname')]",
@@ -76,7 +76,7 @@
             },
             "copy":{
                 "name": "vairakas",
-                "count": 2                
+                "count": 4                
             }
         }           
     ]
