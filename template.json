@@ -31,7 +31,7 @@
             },
             "copy":{
                 "name": "vairakas",
-                "count": 3                
+                "count": 2                
             }
                           },
         {
@@ -76,7 +76,7 @@
             },
             "copy":{
                 "name": "vairakas",
-                "count": 3                
+                "count": 2                
             }
         }           
     ]
