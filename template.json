@@ -2,7 +2,9 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-       
+        "vmname": {
+           "type": "string",
+            "defaultValue": "armVM"}
     },
     "variables": {
         "vNIC": "[concat(parameters('vmname'),'-vNIC')]"
@@ -10,7 +12,7 @@
     "resources": [
         
                                        {
-            "name": "[concat(variables('vNIC'),copyIndex())]",
+            "name": "[variables('vNIC')]",
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2019-11-01",
             "location": "[resourceGroup().location]",
@@ -26,24 +28,21 @@
                         }
                     }
                 ]
-            },
-            "copy":{
-                "name": "vairakas",
-                "count": 4                
             }
-                          },
+                                       },
+
         {
-            "name": "[concat (parameters('vmname'), copyIndex())]",
+            "name": "[parameters('vmname')]",
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2019-07-01",
             "location": "[resourceGroup().location]",
             "dependsOn": [
              //   "[resourceId('Microsoft.Storage/storageAccounts', toLower(variables('osDisk')))]",
-                "[resourceId('Microsoft.Network/networkInterfaces', concat( variables('vNIC'), copyIndex()))]"
+                "[resourceId('Microsoft.Network/networkInterfaces',  variables('vNIC'))]"
             ],
             "properties": {
                 "hardwareProfile": {
-                    "vmSize": "Standard_A1_v2"
+                    "vmSize": "Standard_B1s"
                 },
                 "osProfile": {
                     "computerName": "[parameters('vmname')]",
@@ -52,13 +51,13 @@
                 },
                 "storageProfile": {
                     "imageReference": {
-                        "publisher": "MicrosoftWindowsServer",
-                        "offer": "WindowsServer",
-                        "sku": "2019-Datacenter",
+                        "publisher": "Canonical",
+                        "offer": "UbuntuServer",
+                        "sku": "18.04-LTS",
                         "version": "latest"
                     },
                     "osDisk": {
-                        "name":  "[concat (parameters('vmname'), copyIndex(), '-osDisk')]",
+                        "name":  "[concat (parameters('vmname'), '-osDisk')]",
                         "caching": "ReadWrite",
                         "createOption": "FromImage"
                     }
@@ -66,15 +65,11 @@
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('vNIC'),copyIndex()))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('vNIC'))]"
                         }
                     ]
                 }
                 
-            },
-            "copy":{
-                "name": "vairakas",
-                "count": 4                
             }
         }           
     ]
